@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.model.Drone;
+import com.company.model.Entity;
 import com.company.command.Deliver;
 import com.company.model.Map;
 import com.company.model.Order;
@@ -90,5 +92,36 @@ public class Algo {
             data[right] = temp;
         }
     }
+    public static Drone getFreeDrone(List<Drone> drones){
+        int minValue = Integer.MAX_VALUE;
+        int minIndex = -1;
+        for(int i = 0; i < drones.size(); i++){
+            if(drones.get(i).time == 0) {
+                return drones.get(i);
+            }else if(drones.get(i).time < minValue){
+                minValue = drones.get(i).time;
+                minIndex = i;
+            }
+        }
+        for(Drone drone: drones){
+            drone.time -= minValue;
+        }
+        return drones.get(minIndex);
+
+    }
+
+    public static Warehouse findNearestWarehouse(Entity entity, List<Warehouse> warehouses){
+        int minDistance = Integer.MAX_VALUE;
+        Warehouse nearestWarehouse = null;
+        for(Warehouse warehouse: warehouses){
+            int distance = getDistance(warehouse.x, warehouse.y, entity.x, entity.y);
+            if(distance < minDistance && !warehouse.isEmpty()){
+                nearestWarehouse = warehouse;
+                minDistance = distance;
+            }
+        }
+        return nearestWarehouse;
+    }
+
 
 }
