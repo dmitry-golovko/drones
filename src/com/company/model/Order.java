@@ -5,6 +5,6 @@ package com.company.model;
  */
 public class Order extends Entity {
 
-    int[] products;
+    public int[] products;
 
 }

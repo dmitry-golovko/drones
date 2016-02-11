@@ -5,6 +5,6 @@ package com.company.model;
  */
 public abstract class Entity {
 
-    int x ,y;
+    public int x ,y;
 
 }
