@@ -5,6 +5,6 @@ package com.company.model;
  */
 public class ProductConfig {
 
-    int[] productWeights;
+    public int[] productWeights;
 
 }

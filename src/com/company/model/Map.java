@@ -5,7 +5,7 @@ package com.company.model;
  */
 public class Map {
 
-    int width, height;
-    byte[][] map;
+    public int width, height;
+    public byte[][] map;
 
 }
