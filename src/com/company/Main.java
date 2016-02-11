@@ -37,9 +37,12 @@ public class Main {
                 warehouse.x = scanner.nextInt();
                 warehouse.y = scanner.nextInt();
                 warehouse.products = new int[productCount];
+                warehouse.books = new int[productCount];
                 for(int j = 0; j < productCount; j++){
                     warehouse.products[j] = scanner.nextInt();
                 }
+                warehouseList.add(warehouse);
+                warehouse.num = i;
             }
 
             int orderCount = scanner.nextInt();
@@ -50,19 +53,28 @@ public class Main {
                 order.y = scanner.nextInt();
                 int orderItemsCount = scanner.nextInt();
                 order.products = new int[productCount];
+                order.books = new int[productCount];
                 for(int j = 0; j < orderItemsCount; j++){
                     order.products[scanner.nextInt()]++;
                 }
+                orders.add(order);
+                order.num = i;
 
             }
 
             Algo.calcPaths(warehouseList, orders);
 
             List<Drone> dr = new ArrayList<>(drones);
-            Collections.fill(dr, new Drone());
+
+            for (int i = 0; i < drones; i++)
+                dr.add(new Drone());
+
+//            Collections.fill(dr, new Drone());
 
             Map map = new Map();
             map.run(maxWeight, dr, warehouseList, orders);
+
+            System.out.print("" + Algo.time);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

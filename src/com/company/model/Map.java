@@ -22,7 +22,7 @@ public class Map {
 
         Algo.bookProducts(this, maxWeight, orders, warehouses);
 
-        while (isOrdersEmpty()) {
+        while (!isOrdersEmpty()) {
 
             Drone drone = Algo.getFreeDrone(drones);
             Warehouse warehouse = Algo.findNearestWarehouse(drone, warehouses);
@@ -30,7 +30,16 @@ public class Map {
             Order order = findNearestOrder(orders, warehouse.num);
 
             List<Deliver> del = delivers.get(order);
+
+            if (del == null) {
+                Algo.pathsFromWarehouse[warehouse.num][order.num] = Integer.MAX_VALUE;
+                continue;
+            }
+
             Deliver d = getDeliverForWar(warehouse, del);
+
+            if (del.isEmpty())
+                delivers.remove(order);
 
             Command.load(drone, warehouse, d.product, d.count);
             Command.deliver(drone, order, d.product, d.count);

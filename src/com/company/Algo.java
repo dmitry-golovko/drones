@@ -62,6 +62,7 @@ public class Algo {
 
     public static void calcPaths(List<Warehouse> warehouses, List<Order> orders) {
         pathsFromWarehouse = new int[warehouses.size()][orders.size()];
+        pathsFromOrders = new int[orders.size()][warehouses.size()];
 
         for (Warehouse warehouse : warehouses) {
             for (Order order : orders) {
@@ -90,6 +91,7 @@ public class Algo {
         }
     }
     public static Drone getFreeDrone(List<Drone> drones){
+
         int minValue = Integer.MAX_VALUE;
         int minIndex = -1;
         for(int i = 0; i < drones.size(); i++){
