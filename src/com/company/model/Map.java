@@ -18,8 +18,11 @@ public class Map {
 
     public HashMap<Order, List<Deliver>> delivers = new HashMap<>();
 
-    public void run(List<Drone> drones, List<Warehouse> warehouses, List<Order> orders) {
-        while (isOrdersEmpty()) {
+    public void run(int maxWeight, List<Drone> drones, List<Warehouse> warehouses, List<Order> orders) {
+
+        Algo.bookProducts(this, maxWeight, orders, warehouses);
+
+        while (!isOrdersEmpty()) {
 
             Drone drone = Algo.getFreeDrone(drones);
             Warehouse warehouse = Algo.findNearestWarehouse(drone, warehouses);
@@ -27,7 +30,16 @@ public class Map {
             Order order = findNearestOrder(orders, warehouse.num);
 
             List<Deliver> del = delivers.get(order);
+
+            if (del == null) {
+                Algo.pathsFromWarehouse[warehouse.num][order.num] = Integer.MAX_VALUE;
+                continue;
+            }
+
             Deliver d = getDeliverForWar(warehouse, del);
+
+            if (del.isEmpty())
+                delivers.remove(order);
 
             Command.load(drone, warehouse, d.product, d.count);
             Command.deliver(drone, order, d.product, d.count);
