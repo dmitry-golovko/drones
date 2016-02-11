@@ -7,6 +7,8 @@ public abstract class Entity {
 
     public int x ,y;
 
+    public int num;
+
     public int getX() {
         return x;
     }
