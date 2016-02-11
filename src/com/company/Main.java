@@ -49,9 +49,9 @@ public class Main {
                 order.x = scanner.nextInt();
                 order.y = scanner.nextInt();
                 int orderItemsCount = scanner.nextInt();
-                order.products = new int[orderItemsCount];
+                order.products = new int[productCount];
                 for(int j = 0; j < orderItemsCount; j++){
-                    order.products[j] = scanner.nextInt();
+                    order.products[scanner.nextInt()]++;
                 }
 
             }

@@ -15,7 +15,7 @@ import java.util.List;
  * Created by bsh on 11.02.16.
  */
 public class Algo {
-
+    public static int time = 0;
     public static int[][] pathsFromWarehouse;
     public static int[][] pathsFromOrders;
 
@@ -102,6 +102,7 @@ public class Algo {
         }
         for(Drone drone: drones){
             drone.time -= minValue;
+            time += minValue;
         }
         return drones.get(minIndex);
 
