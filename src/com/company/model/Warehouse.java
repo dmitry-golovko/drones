@@ -5,6 +5,6 @@ package com.company.model;
  */
 public class Warehouse extends Entity {
 
-    int[] products;
+    public int[] products;
 
 }
