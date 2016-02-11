@@ -6,8 +6,6 @@ package com.company.model;
 public class Drone extends Entity {
 
     public int payload;
+    public int time;
 
-    public int getPayload() {
-        return payload;
-    }
 }

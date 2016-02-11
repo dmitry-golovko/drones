@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.model.Drone;
 import com.company.model.Order;
 import com.company.model.Warehouse;
 
@@ -42,6 +43,23 @@ public class Algo {
             data[left] = data[right];
             data[right] = temp;
         }
+    }
+    public static Drone getFreeDrone(List<Drone> drones){
+        int minValue = Integer.MAX_VALUE;
+        int minIndex = -1;
+        for(int i = 0; i < drones.size(); i++){
+            if(drones.get(i).time == 0) {
+                return drones.get(i);
+            }else if(drones.get(i).time < minValue){
+                minValue = drones.get(i).time;
+                minIndex = i;
+            }
+        }
+        for(Drone drone: drones){
+            drone.time -= minValue;
+        }
+        return drones.get(minIndex);
+
     }
 
 }
