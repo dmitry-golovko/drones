@@ -18,7 +18,10 @@ public class Map {
 
     public HashMap<Order, List<Deliver>> delivers = new HashMap<>();
 
-    public void run(List<Drone> drones, List<Warehouse> warehouses, List<Order> orders) {
+    public void run(int maxWeight, List<Drone> drones, List<Warehouse> warehouses, List<Order> orders) {
+
+        Algo.bookProducts(this, maxWeight, orders, warehouses);
+
         while (isOrdersEmpty()) {
 
             Drone drone = Algo.getFreeDrone(drones);

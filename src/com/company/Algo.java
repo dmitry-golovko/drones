@@ -19,9 +19,7 @@ public class Algo {
     public static int[][] pathsFromWarehouse;
     public static int[][] pathsFromOrders;
 
-    public static Map bookProducts(List<Order> orders, List<Warehouse> warehouses) {
-
-        Map map = new Map();
+    public static void bookProducts(Map map, int maxWeight, List<Order> orders, List<Warehouse> warehouses) {
 
         for (Order order : orders) {
 
@@ -33,7 +31,7 @@ public class Algo {
                 for (Warehouse warehouse : warehouses) {
 
                     int prodW = warehouse.products[i];
-                    int prodC = order.products[i];
+                    int prodC = maxWeight < order.products[i] ? maxWeight : order.products[i];
 
                     if (prodW != 0) {
 
@@ -41,11 +39,11 @@ public class Algo {
                         Deliver deliver;
 
                         if (prodW >= prodC) {
-                            deliver = new Deliver(warehouse, order, i, prodW - prodC);
+                            deliver = new Deliver(warehouse, order, i, prodC);
                             prodW -= prodC;
                             prodC = 0;
                         } else {
-                            deliver = new Deliver(warehouse, order, i, prodC - prodW);
+                            deliver = new Deliver(warehouse, order, i, prodW);
                             prodW = 0;
                             prodC -= prodW;
                         }
@@ -60,8 +58,6 @@ public class Algo {
                 }
             }
         }
-
-        return map;
     }
 
     public static void calcPaths(List<Warehouse> warehouses, List<Order> orders) {

@@ -1,11 +1,14 @@
 package com.company;
 
+import com.company.model.Drone;
+import com.company.model.Map;
 import com.company.model.Order;
 import com.company.model.Warehouse;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -53,7 +56,13 @@ public class Main {
 
             }
 
+            Algo.calcPaths(warehouseList, orders);
 
+            List<Drone> dr = new ArrayList<>(drones);
+            Collections.fill(dr, new Drone());
+
+            Map map = new Map();
+            map.run(maxWeight, dr, warehouseList, orders);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
