@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.model.Drone;
+import com.company.model.Entity;
 import com.company.model.Order;
 import com.company.model.Warehouse;
 
@@ -61,5 +62,19 @@ public class Algo {
         return drones.get(minIndex);
 
     }
+
+    public static Warehouse findNearestWarehouse(Entity entity, List<Warehouse> warehouses){
+        int minDistance = Integer.MAX_VALUE;
+        Warehouse nearestWarehouse = null;
+        for(Warehouse warehouse: warehouses){
+            int distance = getDistance(warehouse.x, warehouse.y, entity.x, entity.y);
+            if(distance < minDistance && !warehouse.isEmpty()){
+                nearestWarehouse = warehouse;
+                minDistance = distance;
+            }
+        }
+        return nearestWarehouse;
+    }
+
 
 }
