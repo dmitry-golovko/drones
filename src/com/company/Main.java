@@ -1,9 +1,11 @@
 package com.company;
 
+import com.company.command.Command;
 import com.company.model.Drone;
 import com.company.model.Map;
 import com.company.model.Order;
 import com.company.model.Warehouse;
+import com.company.output.Output;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -67,7 +69,7 @@ public class Main {
             List<Drone> dr = new ArrayList<>(drones);
 
             for (int i = 0; i < drones; i++)
-                dr.add(new Drone());
+                dr.add(new Drone(i, warehouseList.get(0).x, warehouseList.get(0).y));
 
 //            Collections.fill(dr, new Drone());
 
@@ -75,6 +77,7 @@ public class Main {
             map.run(maxWeight, dr, warehouseList, orders);
 
             System.out.print("" + Algo.time);
+            Output.writeToFile(new File("out.txt"), Command.commands, Algo.time);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

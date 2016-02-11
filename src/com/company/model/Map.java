@@ -44,6 +44,13 @@ public class Map {
             Command.load(drone, warehouse, d.product, d.count);
             Command.deliver(drone, order, d.product, d.count);
         }
+        int maxTime = -1;
+        for(Drone drone:drones){
+            if(maxTime < drone.time){
+                maxTime = drone.time;
+            }
+        }
+        Algo.time += maxTime;
     }
 
     Deliver getDeliverForWar(Warehouse warehouse, List<Deliver> delivers) {

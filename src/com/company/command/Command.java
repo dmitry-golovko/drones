@@ -17,12 +17,13 @@ public class Command {
 
     public static void load(Drone drone, Warehouse warehouse, int product, int count) {
         drone.time = 1 + Algo.getDistance(warehouse.x, warehouse.y, drone.x, drone.y);
-        commands.add(drone.num + " L " + warehouse.num + " " + product + " " + count);
+        warehouse.books[product] -= count;
+        commands.add(drone.num + " L " + warehouse.num + " " + product + " " + count + " time = " + drone.time );
     }
 
     public static void deliver(Drone drone, Order order, int product, int count) {
         drone.time = 1 + Algo.getDistance(order.x, order.y, drone.x, drone.y);
-        commands.add(drone.num + " D " + order.num + " " + product + " " + count);
+        commands.add(drone.num + " D " + order.num + " " + product + " " + count + " time = " + drone.time);
     }
 
     public static void unload(Drone drone, Warehouse warehouse, int product, int count) {
