@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.command.Deliver;
+import com.company.model.Map;
 import com.company.model.Order;
 import com.company.model.Warehouse;
 
@@ -13,6 +15,51 @@ public class Algo {
 
     public static int[][] pathsFromWarehouse;
     public static int[][] pathsFromOrders;
+
+    public static Map bookProducts(List<Order> orders, List<Warehouse> warehouses) {
+
+        Map map = new Map();
+
+        for (Order order : orders) {
+
+            for (int i = 0; i < order.products.length; i++) {
+
+                if (order.products[i] == 0)
+                    continue;
+
+                for (Warehouse warehouse : warehouses) {
+
+                    int prodW = warehouse.products[i];
+                    int prodC = order.products[i];
+
+                    if (prodW != 0) {
+
+                        List<Deliver> delivers = map.getDelivers(order);
+                        Deliver deliver;
+
+                        if (prodW >= prodC) {
+                            deliver = new Deliver(warehouse, order, i, prodW - prodC);
+                            prodW -= prodC;
+                            prodC = 0;
+                        } else {
+                            deliver = new Deliver(warehouse, order, i, prodC - prodW);
+                            prodW = 0;
+                            prodC -= prodW;
+                        }
+
+                        delivers.add(deliver);
+
+                        warehouse.products[i] = prodW;
+                        warehouse.books[i] += deliver.count;
+                        order.products[i] = prodC;
+                        order.books[i] += deliver.count;
+                    }
+                }
+            }
+        }
+
+        return map;
+    }
 
     public static void calcPaths(List<Warehouse> warehouses, List<Order> orders) {
         pathsFromWarehouse = new int[warehouses.size()][orders.size()];

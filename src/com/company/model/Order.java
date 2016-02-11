@@ -7,4 +7,6 @@ public class Order extends Entity {
 
     public int[] products;
 
+    public int[] books;
+
 }

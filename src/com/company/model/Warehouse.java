@@ -7,4 +7,6 @@ public class Warehouse extends Entity {
 
     public int[] products;
 
+    public int[] books;
+
 }
