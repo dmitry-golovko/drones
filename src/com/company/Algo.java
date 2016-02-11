@@ -8,6 +8,7 @@ import com.company.model.Order;
 import com.company.model.Warehouse;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -71,12 +72,12 @@ public class Algo {
                 pathsFromWarehouse[warehouse.num][order.num] = getDistance(warehouse.x, warehouse.y, order.x, order.y);
                 pathsFromOrders[order.num][warehouse.num] = pathsFromWarehouse[warehouse.num][order.num];
             }
-            Arrays.sort(pathsFromWarehouse[warehouse.num]);
+//            Arrays.sort(pathsFromWarehouse[warehouse.num]);
         }
 
-        for (Order order : orders) {
-            Arrays.sort(pathsFromOrders[order.num]);
-        }
+//        for (Order order : orders) {
+//            Arrays.sort(pathsFromOrders[order.num]);
+//        }
 
     }
 
